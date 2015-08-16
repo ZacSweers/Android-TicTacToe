@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<io.sweers.tictactoe.TicTacToeView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ttt_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/zero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/four"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/five"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/six"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/seven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+    <io.sweers.tictactoe.ForegroundImageView
+        android:id="@+id/eight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Theme.TTT.Tile"
+        />
+
+</io.sweers.tictactoe.TicTacToeView>
