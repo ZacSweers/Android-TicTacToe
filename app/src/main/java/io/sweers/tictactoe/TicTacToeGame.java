@@ -310,43 +310,26 @@ public final class TicTacToeGame {
         }
 
         ++depth;
-        int max = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-        int maxIndex = 0;
-        int minIndex = 0;
+        boolean isPlayerTwo = player == PLAYER_TWO;
+        char otherPlayer = isPlayerTwo ? PLAYER_ONE : PLAYER_TWO;
+        int runningScore = isPlayerTwo ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        int chosenIndex = 0;
 
         for (int i = 0; i < pointsAvailable.size(); ++i) {
             int index = pointsAvailable.get(i);
-            if (player == PLAYER_TWO) {
-                makeDummyMove(index, PLAYER_TWO);
-                int score = minimax(depth, PLAYER_ONE, index);
-                if (score > max
-                        || (score == max && random.nextBoolean())) {    // Equally good options, so randomly choose one for added flavor
-                    max = score;
-                    maxIndex = index;
-                }
-            } else if (player == PLAYER_ONE) {
-                makeDummyMove(index, PLAYER_ONE);
-                int score = minimax(depth, PLAYER_TWO, index);
-                if (score < min
-                        || (score == min && random.nextBoolean())) {    // Equally good options, so randomly choose one for added flavor
-                    min = score;
-                    minIndex = index;
-                }
+            makeDummyMove(index, player);
+            int score = minimax(depth, otherPlayer, index);
+            if ((isPlayerTwo && score > runningScore)
+                    || (!isPlayerTwo && score < runningScore)
+                    || (score == runningScore && random.nextBoolean())) {   // Equally good/bad options, so randomly choose one for added flavor
+                runningScore = score;
+                chosenIndex = index;
             }
             grid[index] = NONE; // Clean up when we're done
         }
 
-        if (player == PLAYER_TWO) {
-            // Max calc
-            nextCpuMove = maxIndex;
-            SCORE_CACHE.put(stateKey, max);
-            return max;
-        } else {
-            // Min calc
-            nextCpuMove = minIndex;
-            SCORE_CACHE.put(stateKey, min);
-            return min;
-        }
+        nextCpuMove = chosenIndex;
+        SCORE_CACHE.put(stateKey, runningScore);
+        return runningScore;
     }
 }
