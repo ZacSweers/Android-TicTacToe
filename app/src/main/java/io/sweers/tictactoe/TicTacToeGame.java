@@ -1,8 +1,10 @@
 package io.sweers.tictactoe;
 
 import android.support.annotation.IntDef;
+import android.support.v4.util.ArrayMap;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -41,6 +43,9 @@ public final class TicTacToeGame {
     @GameState private int gameState = CONTINUE;
     private OnGameOverListener onGameOverListener;
     private final Random random = new Random();
+
+    // Cache of previously calculated scores
+    public static final ArrayMap<String, Integer> SCORE_CACHE = new ArrayMap<>();
 
     // Mapping of grid indices to their x,y coordinates
     private static final int[][] COORDINATES_MAPPING = {
@@ -288,6 +293,10 @@ public final class TicTacToeGame {
      *         or minimized score if human (PLAYER_ONE)
      */
     private int minimax(int depth, char player, int newIndex) {
+        String stateKey = Arrays.toString(grid) + player + depth;
+        if (SCORE_CACHE.containsKey(stateKey)) {
+            return SCORE_CACHE.get(stateKey);
+        }
         List<Integer> pointsAvailable = getAvailableStates();
         if (depth != 0) {
             @GameState int currentResult = checkForWinner(newIndex);
@@ -331,10 +340,12 @@ public final class TicTacToeGame {
         if (player == PLAYER_TWO) {
             // Max calc
             nextCpuMove = maxIndex;
+            SCORE_CACHE.put(stateKey, max);
             return max;
         } else {
             // Min calc
             nextCpuMove = minIndex;
+            SCORE_CACHE.put(stateKey, min);
             return min;
         }
     }
